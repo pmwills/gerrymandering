@@ -2,8 +2,6 @@
 import MySQLdb
 
 
-
-
 def connectToDatabase():
     db = MySQLdb.connect(host="45.79.146.49", # your host, usually localhost
                          user="root", # your username
@@ -12,8 +10,7 @@ def connectToDatabase():
 
     cur = db.cursor()
 
-    return cur
-
+    return cur, db
 
 
 def beginProcess(cur):
@@ -22,13 +19,11 @@ def beginProcess(cur):
         addNeighbor(precinct)
 
 
+def main():
+    cur,db = connectToDatabase()
+    cur.execute("SELECT OID_ FROM minnesota ORDER BY RAND()LIMIT 3")
+    for x in cur.fetchall():
+        print x
 
-
-
-#def addNeigbor(precinct):
-    #if(precinct.hasNeigbors()):
-
-cur = connectToDatabase()
-cur.execute("SELECT OID_ FROM minnesota ORDER BY RAND()LIMIT 3")
-for x in cur.fetchall():
-    print x
+if __name__ == "__main__":
+    main()
