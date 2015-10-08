@@ -29,5 +29,6 @@ def beginProcess(cur):
     #if(precinct.hasNeigbors()):
 
 cur = connectToDatabase()
-item = cur.execute("SELECT OID_ FROM minnesota ORDER BY RAND()")
-print item
+cur.execute("SELECT OID_ FROM minnesota ORDER BY RAND()LIMIT 3")
+for x in cur.fetchall():
+    print x
